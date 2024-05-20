@@ -4,5 +4,5 @@ Szótárfüzet alkalmazás. \
 Technológia: Angular, Bootstrap, Node.js, Express \
 Adatbázis: MongoDB \
 Futtatás: \
-Backend: `npm run start: server` \
+Backend: `npm run start:server` \
 Frontend: `npm run start:client`
