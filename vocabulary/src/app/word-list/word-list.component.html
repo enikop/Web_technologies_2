@@ -1,0 +1,18 @@
+<div class="container">
+  <h2 *ngIf="topic" class="mb-4 mt-2">
+    {{topic.name}}
+    <small class="text-{{topic.colour}}">{{topic.language}}</small>
+  </h2>
+  <div class="row">
+    <h5 class="col-5 text-center"><b>Word</b></h5>
+    <h5 class="col-5 text-center"><b>Meaning</b></h5>
+  </div>
+  @for(word of words; track $index){
+    <div class="row" [class.bg-light]="$index%2==0">
+      <div class="col-5 p-1 ps-3 border-end border-dark">{{word.target}}</div>
+      <div class="col-5 p-1 ps-3 border-end border-dark">{{word.source}}</div>
+      <div class="col-2 p-1 ps-3 text-center"><a class="link-opacity-75 link-opacity-25-hover link-dark" (click)="deleteWord(word)"><i class="fas fa-trash"></i></a></div>
+    </div>
+  }
+  <app-word-form [topic]="topic" (wordChangeEvent)="increaseChangeCount()"></app-word-form>
+</div>

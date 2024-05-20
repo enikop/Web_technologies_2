@@ -1,0 +1,46 @@
+<div class="row justify-content-md-center">
+  <h2 class="text-center mt-3">Sign up</h2>
+  <div class="col-md-6 mt-3">
+    <form [formGroup]="registerForm">
+      <div class="mb-2">
+        <label for="firstName" class="form-label">First name</label>
+        <input type="text" class="form-control" [class.is-invalid]="(registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.dirty)" id="firstName" formControlName="firstName">
+        <div class="text-danger form-text"
+              *ngIf="(registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.dirty) ">
+              {{errorMessage.firstName}}</div>
+      </div>
+      <div class="mb-2">
+        <label for="lastName" class="form-label">Last name</label>
+        <input type="text" class="form-control" [class.is-invalid]="(registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.dirty)" id="lastName" formControlName="lastName">
+        <div class="text-danger form-text"
+              *ngIf="(registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.dirty)">
+              {{errorMessage.lastName}}</div>
+      </div>
+      <div class="mb-2">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" autocomplete="username" class="form-control" [class.is-invalid]="(registerForm.get('username')?.invalid && registerForm.get('username')?.dirty)" id="username" formControlName="username">
+        <div class="text-danger form-text"
+              *ngIf="(registerForm.get('username')?.invalid && registerForm.get('username')?.dirty)">
+              {{errorMessage.username}}</div>
+      </div>
+      <div class="mb-2">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" autocomplete="new-password" class="form-control" [class.is-invalid]="(registerForm.get('password')?.invalid && registerForm.get('password')?.dirty)" id="password" formControlName="password">
+        <div class="text-danger form-text"
+              *ngIf="(registerForm.get('password')?.invalid && registerForm.get('password')?.dirty)">
+              {{errorMessage.password}}</div>
+      </div>
+      <div class="mb-2">
+        <label for="password-again" class="form-label">Password again</label>
+        <input type="password" autocomplete="new-password" class="form-control" [class.is-invalid]="registerForm.errors && registerForm.errors['equals'] && registerForm.get('passwordAgain')?.dirty" id="password-again" formControlName="passwordAgain">
+        <div class="text-danger form-text"
+        *ngIf="registerForm.errors && registerForm.errors['equals'] && registerForm.get('passwordAgain')?.dirty">
+        {{errorMessage.passwordAgain}}</div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-outline-primary mt-3" (click)="register()">Sign up</button>
+      </div>
+    </form>
+  </div>
+</div>

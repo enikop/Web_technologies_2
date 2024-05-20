@@ -1,0 +1,37 @@
+<div class="container">
+  <div *ngIf="topics.length == 0" class="text-center">
+    <div><i>No topics can be found.</i></div>
+    <a href="/add-topic" class="btn btn-sm btn-dark mt-2">Add a topic</a>
+  </div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" *ngIf="topics.length > 0">
+    @for(topic of topics; track $index){
+      <div class="col">
+        <div class="card m-1 h-100" [ngClass]="'text-bg-' + topic.colour">
+          <div class="card-header text-center d-flex justify-content-between">
+            <a class="link-opacity-75 link-opacity-25-hover link-dark" (click)="deleteTopic(topic)"><i class="fas fa-trash"></i></a>
+            <div>{{topic.language}}</div>
+            <a class="link-opacity-75 link-opacity-25-hover link-dark" href="edit-topic/{{topic._id}}"><i class="fas fa-edit"></i></a>
+          </div>
+          <div class="card-body bg-transparent">
+            <h5 class="card-title">{{topic.name}}</h5>
+            <div class="card-text">
+              <div><b>Level: </b>{{topic.level}}</div>
+              <div><b>Number of words: </b> {{topic.words.length}}</div>
+              <div><b>Last revised: </b>{{formatTimestamp(topic.last_revised)}}</div>
+              <div><b>Revision count: </b>{{topic.revision_count}}</div>
+            </div>
+          </div>
+          <div class="card-footer text-center d-flex flex-wrap justify-content-around">
+            <a href="/topics/{{topic._id}}" class="btn btn-light mb-1">Words</a>
+            <div placement="top" [ngbTooltip]="topic.words.length < exerciseNumber ? 'A minimum of '+ exerciseNumber+ ' words must be collected to practise.': null">
+              <button routerLink="/topics/practice/{{topic._id}}" class="btn btn-light mb-1" [disabled]="topic.words.length < exerciseNumber">
+                Practice
+              </button>
+            </div>
+            <a href="/topics/stats/{{topic._id}}" class="btn btn-light mb-1">Stats</a>
+          </div>
+        </div>
+      </div>
+      }
+  </div>
+</div>

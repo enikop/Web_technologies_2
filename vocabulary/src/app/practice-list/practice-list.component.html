@@ -1,0 +1,62 @@
+<div class="row" *ngIf="user">
+  <div class="col-md-5">
+    <div class="card text-white m-1 bg-dark">
+      <div class="card-header text-center">
+        <div>Profile</div>
+      </div>
+      <div class="card-body bg-transparent">
+        <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+        <div class="card-text justify-content-center align-items-center mb-3">
+          <div><b>Username: </b>{{user.username}}</div>
+          <div><b>Cumulated score: </b>{{cumulatedScore}}</div>
+          <div *ngIf="practices.length > 0"><b>Average score: </b>{{avgScore}}/{{scoreMaximum}} ({{getAvgPercent()}}%)</div>
+          <div><b>No. of practices: </b> {{practices.length}}</div>
+          <div><b>No. of practised topics: </b> {{getPractisedTopicNumber()}}</div>
+          <div *ngIf="practices.length > 0"><b>Most recently practised: </b>
+            {{practices[0].topic.name}}
+              <small class="badge text-bg-{{practices[0].topic.colour}}">{{practices[0].topic.language}}</small>
+          </div>
+          <div *ngIf="leastRecentlyPractisedTopic"><b>Least recently practised: </b>
+            {{leastRecentlyPractisedTopic.name}}
+              <small class="badge text-bg-{{leastRecentlyPractisedTopic.colour}}">{{leastRecentlyPractisedTopic.language}}</small>
+          </div>
+          <div><b>Most practised: </b>
+            <span *ngIf="mostPractisedTopic">
+              {{mostPractisedTopic.name}}
+              <small class="badge text-bg-{{mostPractisedTopic.colour}}">{{mostPractisedTopic.language}}</small>
+            </span>
+            <span *ngIf="!mostPractisedTopic">none</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="card text-white m-1 bg-secondary">
+      <div class="card-header text-center">
+        <div>History</div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Practices</h5>
+        <div class="card-text">
+          <div class="row text-center" *ngIf="practices.length == 0"><i>You have not practised yet.</i></div>
+          <div class="row" *ngIf="practices.length > 0">
+            <div class="col-5"><b>Topic</b></div>
+            <div class="col-5"><b>Date and time</b></div>
+            <div class="col-2 text-end"><b>Score</b></div>
+          </div>
+        @for(practice of practices; track $index){
+          <div class="row pt-1">
+            <div class="col-5">
+              {{practice.topic.name}}
+              <small class="badge text-bg-{{practice.topic.colour}}">{{practice.topic.language}}</small>
+            </div>
+            <div class="col-5">{{formatTimestamp(practice.timestamp)}}</div>
+            <div class="col-2 text-end">{{practice.score}}/{{scoreMaximum}}</div>
+          </div>
+        }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-md navbar-dark p-2 sticky-top bg-dark">
+  <a class="navbar-brand ms-4 me-4" href="#">MyVocabulary</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" (click)="isMenuCollapsed = !isMenuCollapsed" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" >
+    <span class="navbar-toggler-icon" ></span>
+  </button>
+  <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapsed" id="navbarNav" >
+
+    <ul class="navbar-nav w-100">
+      @if(authService.isLoggedIn()) {
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="isActiveRoute('topics')"  routerLink="/topics">Topics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="isActiveRoute('add-topic')"  routerLink="/add-topic">Add topic</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="isActiveRoute('history')"  routerLink="/history">History</a>
+      </li>
+      }
+    </ul>
+    <ul class="navbar-nav justify-content-end">
+      @if(!authService.isLoggedIn()) {
+      <li class="nav-item" >
+        <a class="nav-link" [class.active]="isActiveRoute('login')" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" [class.active]="isActiveRoute('register')" routerLink="/register">Register</a>
+      </li>
+      }
+      @if(authService.isLoggedIn()) {
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
+      }
+    </ul>
+  </div>
+</nav>
+<main class="container mt-3 mb-5">
+  <router-outlet/>
+</main>
+<footer class="footer fixed-bottom p-1 bg-light">
+  <div class="container d-flex justify-content-center">
+    <span class="small mb-1 text-custom">Palencsár Enikő - YD11NL - Web technologies - 2024 </span>
+  </div>
+</footer>
+

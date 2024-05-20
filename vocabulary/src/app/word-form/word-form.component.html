@@ -1,0 +1,25 @@
+<form [formGroup]="wordForm" *ngIf="topic">
+  <div class="row">
+    <div class="col-5 pt-2 border-end border-dark">
+      <div class="form-group">
+        <input type="text" class="form-control input-sm" id="target" formControlName="target">
+        <div class="text-danger form-text"
+          *ngIf="wordForm.get('target')?.invalid && wordForm.get('target')?.dirty">
+          {{errorMessage}}
+        </div>
+      </div>
+    </div>
+    <div class="col-5 pt-2 border-end border-dark">
+      <div class="form-group">
+        <input type="text" class="form-control input-sm" id="source" formControlName="source">
+        <div class="text-danger form-text"
+          *ngIf="wordForm.get('source')?.invalid && wordForm.get('source')?.dirty">
+          {{errorMessage}}
+        </div>
+      </div>
+    </div>
+    <div class="col-2 ps-3 p-1 d-flex justify-content-center text-center align-items-start pt-2">
+      <button type="submit" class="btn btn-{{topic.colour}} w-100" (click)="saveWord()">Add</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,8 @@
+<div class="container">
+  <h2 class="mb-4 mt-2">
+    Edit topic
+    <small *ngIf="topic" class="ms-2 badge text-bg-{{topic.colour}}">{{topic.name}}</small>
+  </h2>
+  <app-topic-form [topic]="topic"></app-topic-form>
+</div>
+

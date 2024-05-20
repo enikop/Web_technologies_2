@@ -1,0 +1,19 @@
+<div class="row justify-content-md-center">
+  <h2 class="text-center mt-3">Login</h2>
+  <div class="col-md-6 mt-3">
+      <form [formGroup]="loginForm">
+          <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" autocomplete="username" class="form-control" id="username" formControlName="username">
+          </div>
+          <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" autocomplete="current-password" class="form-control" id="password" formControlName="password">
+          </div>
+
+          <div class="text-center">
+              <button class="btn btn-outline-primary mt-3" (click)="login()">Login</button>
+          </div>
+      </form>
+  </div>
+</div>

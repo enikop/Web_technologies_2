@@ -1,0 +1,48 @@
+<div class="container" *ngIf="topic">
+  <h2 class="mb-4 mt-4">
+    {{topic.name}}
+    <small class="ms-2 badge text-bg-{{topic.colour}}">{{topic.language}}</small>
+  </h2>
+  <div class="row">
+    <div class="col-md-7 p-2">
+      <div class="card text-bg-dark" [class.h-100]="practices.length != 0">
+        <div class="card-body">
+          <h5 class="card-title">Timeline</h5>
+          <div class="card-text w-100">
+            <div class="text-center" [hidden]="practices.length != 0"><i>You have not practised yet.</i></div>
+            <canvas #chart [hidden]="practices.length == 0" style="height:420px"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5 p-2">
+      <div class="card text-bg-{{topic.colour}}">
+        <div class="card-body bg-transparent">
+          <h5 class="card-title">History</h5>
+          <div class="card-text p-2" style="max-height: 200px; width: 100%; overflow-x:hidden; overflow-y: auto;">
+            <div class="row text-center" *ngIf="practices.length == 0"><i>You have not practised yet.</i></div>
+            <div class="row" *ngIf="practices.length > 0">
+              <div class="col-sm-8"><b>Date and time</b></div>
+              <div class="col-sm-4 text-end"><b>Score</b></div>
+            </div>
+          @for(practice of practices; track $index){
+            <div class="row pt-1">
+              <div class="col-sm-8">{{formatTimestamp(practice.timestamp)}}</div>
+              <div class="col-sm-4 text-end">{{practice.score}}/{{scoreMaximum}}</div>
+            </div>
+          }
+          </div>
+        </div>
+      </div>
+      <div class="card mt-4 text-bg-dark">
+        <div class="card-body bg-transparent">
+          <h5 class="card-title">Score distribution</h5>
+          <div class="card-text">
+            <div class="text-center" [hidden]="practices.length != 0"><i>You have not practised yet.</i></div>
+            <canvas #distChart style="height:175px" [hidden]="practices.length == 0"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

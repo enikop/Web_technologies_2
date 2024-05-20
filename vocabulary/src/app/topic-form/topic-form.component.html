@@ -1,0 +1,54 @@
+<form [formGroup]="topicForm">
+  <div class="row">
+    <div class="col-md-12 pt-3">
+      <div class="form-group row align-items-center">
+        <label for="name" class="col-md-2">Name</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control input-sm" [class.is-invalid]="topicForm.get('name')?.invalid && topicForm.get('name')?.dirty" id="name" formControlName="name">
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="topicForm.get('name')?.invalid && topicForm.get('name')?.dirty">
+      <div class="col-md-2"></div>
+      <small class="col-md-10 text-danger form-text ps-3">{{errorMessage}}</small>
+    </div>
+    <div class="col-md-12 pt-3">
+      <div class="form-group row align-items-center">
+        <label for="language" class="col-md-2">Language</label>
+        <div class="col-md-10">
+          <input type="text" class="form-control input-sm" [class.is-invalid]="topicForm.get('language')?.invalid && topicForm.get('language')?.dirty" id="language" formControlName="language">
+        </div>
+      </div>
+    </div>
+    <div class="row"  *ngIf="topicForm.get('language')?.invalid && topicForm.get('language')?.dirty">
+      <div class="col-md-2"></div>
+      <small class="col-md-10 text-danger ps-3">{{errorMessage}}</small>
+    </div>
+    <div class="col-md-12 pt-3">
+      <div class="form-group row align-items-center">
+        <label class="col-md-2">Colour</label>
+        <div class="row col-md-10 ps-4">
+          <div *ngFor="let option of colourOptions" class="form-check col">
+            <input type="radio" [value]="option" formControlName="colour" id="{{option}}" class="form-check-input">
+            <label [for]="option" class="form-check-label">
+              <span class="badge text-bg-{{option}}">preview</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 pt-3">
+      <div class="form-group row align-items-center">
+        <label for="level" class="col-md-2">Level</label>
+        <div class="col-md-10">
+          <select class="form-control form-select" id="level" formControlName="level">
+            <option *ngFor="let option of levelOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="text-center pt-4">
+      <button type="submit" class="btn btn-dark" (click)="saveTopic()">Save</button>
+    </div>
+  </div>
+</form>
