@@ -1,0 +1,370 @@
+[{
+  "_id": {
+    "$oid": "6647b5db009e754707162689"
+  },
+  "colour": "primary",
+  "language": "Dutch",
+  "name": "Base words",
+  "level": "A1",
+  "words": [
+    {
+      "source": "house",
+      "target": "het huis"
+    },
+    {
+      "source": "tree",
+      "target": "de boom"
+    },
+    {
+      "source": "bicycle",
+      "target": "de fiets"
+    },
+    {
+      "source": "car",
+      "target": "de auto"
+    },
+    {
+      "source": "school",
+      "target": "de school"
+    },
+    {
+      "source": "book",
+      "target": "het boek"
+    },
+    {
+      "source": "fire",
+      "target": "het vuur"
+    },
+    {
+      "source": "air",
+      "target": "de lucht"
+    },
+    {
+      "source": "potato",
+      "target": "de aardappel"
+    },
+    {
+      "source": "apples",
+      "target": "de appels"
+    },
+    {
+      "source": "cat",
+      "target": "de kat"
+    },
+    {
+      "source": "dog",
+      "target": "de hond"
+    },
+    {
+      "source": "street",
+      "target": "de straat"
+    },
+    {
+      "source": "city",
+      "target": "de stad"
+    },
+    {
+      "source": "country",
+      "target": "het land"
+    },
+    {
+      "source": "table",
+      "target": "de tafel"
+    },
+    {
+      "source": "chair",
+      "target": "de stoel"
+    },
+    {
+      "source": "door",
+      "target": "de deur"
+    },
+    {
+      "source": "window",
+      "target": "het raam"
+    },
+    {
+      "source": "deer",
+      "target": "het hert"
+    },
+    {
+      "source": "dinner",
+      "target": "het avondeten"
+    }
+  ],
+  "id": "6647b5db009e754707162689"
+},
+{
+  "_id": {
+    "$oid": "6647bdbb0ae1b6347b0dab7b"
+  },
+  "colour": "danger",
+  "language": "French",
+  "name": "Basics",
+  "level": "A2",
+  "words": [
+    {
+      "source": "house",
+      "target": "la maison"
+    },
+    {
+      "source": "tree",
+      "target": "l'arbre"
+    },
+    {
+      "source": "bicycle",
+      "target": "le vélo"
+    },
+    {
+      "source": "car",
+      "target": "la voiture"
+    },
+    {
+      "source": "school",
+      "target": "l'école"
+    },
+    {
+      "source": "book",
+      "target": "le livre"
+    },
+    {
+      "source": "water",
+      "target": "l'eau"
+    },
+    {
+      "source": "fire",
+      "target": "le feu"
+    },
+    {
+      "source": "air",
+      "target": "l'air"
+    },
+    {
+      "source": "potato",
+      "target": "la pomme de terre"
+    },
+    {
+      "source": "apples",
+      "target": "les pommes"
+    },
+    {
+      "source": "cat",
+      "target": "le chat"
+    },
+    {
+      "source": "dog",
+      "target": "le chien"
+    },
+    {
+      "source": "street",
+      "target": "la rue"
+    },
+    {
+      "source": "city",
+      "target": "la ville"
+    },
+    {
+      "source": "country",
+      "target": "le pays"
+    },
+    {
+      "source": "table",
+      "target": "la table"
+    },
+    {
+      "source": "chair",
+      "target": "la chaise"
+    },
+    {
+      "source": "door",
+      "target": "la porte"
+    },
+    {
+      "source": "window",
+      "target": "la fenêtre"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "664896cbef3cf7d1569d8d9e"
+  },
+  "language": "German",
+  "colour": "info",
+  "level": "B1",
+  "words": [
+    {
+      "source": "horse",
+      "target": "das Pferd"
+    },
+    {
+      "source": "pony",
+      "target": "das Pony"
+    },
+    {
+      "source": "cow",
+      "target": "die Kuh"
+    },
+    {
+      "source": "pig",
+      "target": "das Schwein"
+    },
+    {
+      "source": "rooster",
+      "target": "der Hahn"
+    },
+    {
+      "source": "goose",
+      "target": "die Gans"
+    },
+    {
+      "source": "duck",
+      "target": "die Ente"
+    },
+    {
+      "source": "llama",
+      "target": "das Lama"
+    },
+    {
+      "source": "swan",
+      "target": "der Schwan"
+    }
+  ],
+  "name": "Animals and Plants",
+  "id": "664896cbef3cf7d1569d8d9e"
+},
+{
+  "_id": {
+    "$oid": "6649305fd4936e657d8a0984"
+  },
+  "language": "Italian",
+  "colour": "warning",
+  "level": "A1",
+  "words": [
+    {
+      "source": "Italy",
+      "target": "Italia"
+    },
+    {
+      "source": "France",
+      "target": "Francia"
+    },
+    {
+      "source": "England",
+      "target": "Inghilterra"
+    },
+    {
+      "source": "Belgium",
+      "target": "Belgio"
+    },
+    {
+      "source": "Austria",
+      "target": "Austria"
+    },
+    {
+      "source": "Croatia",
+      "target": "Croazia"
+    },
+    {
+      "source": "Denmark",
+      "target": "Danimarca"
+    },
+    {
+      "source": "Finland",
+      "target": "Finlandia"
+    },
+    {
+      "source": "Germany",
+      "target": "Germania"
+    },
+    {
+      "source": "Greece",
+      "target": "Grecia"
+    },
+    {
+      "source": "Ireland",
+      "target": "Irlanda"
+    },
+    {
+      "source": "The Netherlands",
+      "target": "Paesi Bassi"
+    },
+    {
+      "source": "Poland",
+      "target": "Polonia"
+    },
+    {
+      "source": "Portugal",
+      "target": "Portogallo"
+    },
+    {
+      "source": "Slovakia",
+      "target": "Slovacchia"
+    },
+    {
+      "source": "Spain",
+      "target": "Spagna"
+    },
+    {
+      "source": "Hungary",
+      "target": "Ungheria"
+    },
+    {
+      "source": "Norway",
+      "target": "Norvegia"
+    },
+    {
+      "source": "Ukraine",
+      "target": "Ucraina"
+    },
+    {
+      "source": "Turkey",
+      "target": "Turchia"
+    },
+    {
+      "source": "Sweden",
+      "target": "Svezia"
+    },
+    {
+      "source": "Switzerland",
+      "target": "Svizzera"
+    },
+    {
+      "source": "United States",
+      "target": "Stati Uniti"
+    },
+    {
+      "source": "China",
+      "target": "Cina"
+    },
+    {
+      "source": "Japan",
+      "target": "Giappone"
+    },
+    {
+      "source": "Russia",
+      "target": "Russia"
+    }
+  ],
+  "name": "Countries"
+},
+{
+  "_id": {
+    "$oid": "664bc4173db0251a260d12c4"
+  },
+  "language": "Dutch",
+  "colour": "success",
+  "level": "C1",
+  "words": [],
+  "name": "Advanced words"
+},
+{
+  "_id": {
+    "$oid": "664c961b57469968bf1393ed"
+  },
+  "language": "Urdu",
+  "colour": "secondary",
+  "level": "other",
+  "words": [],
+  "name": "Places"
+}]

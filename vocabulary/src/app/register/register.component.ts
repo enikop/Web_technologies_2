@@ -63,7 +63,6 @@ export class RegisterComponent {
         this.router.navigateByUrl('/login');
       },
       error: (err) => {
-        console.log(err);
         if(err.status == 422){
           this.toastr.error('Selected username already in use.', 'Unsuccessful sign up');
         } else{

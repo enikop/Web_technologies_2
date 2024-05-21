@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "664b8ee4e236c5f1901ef977"
+  },
+  "firstName": "Sarah",
+  "lastName": "Miller",
+  "username": "user1",
+  "password": "$2b$12$Ix52bwV3HxfdRBnkz0q3guuP3npeMe2XqDMzK/oZKG6B2GvKt..9i"
+},
+{
+  "_id": {
+    "$oid": "664b8f18e236c5f1901ef978"
+  },
+  "firstName": "Dylan",
+  "lastName": "Smith",
+  "username": "user2",
+  "password": "$2b$12$Ic8L.ak9QWh8Ga88h1D7GOUKRmDdof8ksn2u4Rkcik/aN.uiBxUd."
+}]

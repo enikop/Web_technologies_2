@@ -1,0 +1,231 @@
+[{
+  "_id": {
+    "$oid": "6648a09721cc8f2823dd2bce"
+  },
+  "score": 12,
+  "username": "user1",
+  "topicId": "6647b5db009e754707162689",
+  "timestamp": {
+    "$date": "2024-05-18T12:35:35.172Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6648a2e41e4cc48d712b8cae"
+  },
+  "score": 5,
+  "username": "user1",
+  "topicId": "6647b5db009e754707162689",
+  "timestamp": {
+    "$date": "2024-05-17T12:45:24.861Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6648a09721cc8f2823dd0000"
+  },
+  "score": 10,
+  "username": "user1",
+  "topicId": "6647bdbb0ae1b6347b0dab7b",
+  "timestamp": {
+    "$date": "2024-05-18T12:30:35.172Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6648a2e00e4cc48d712b8cae"
+  },
+  "score": 8,
+  "username": "user1",
+  "topicId": "6649305fd4936e657d8a0984",
+  "timestamp": {
+    "$date": "2024-05-18T12:45:24.861Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6655a09721cc8f2823dd0000"
+  },
+  "score": 10,
+  "username": "user1",
+  "topicId": "6649305fd4936e657d8a0984",
+  "timestamp": {
+    "$date": "2024-03-21T12:35:35.172Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "664a52e00e4cc48d712b8cae"
+  },
+  "score": 12,
+  "username": "user1",
+  "topicId": "6649305fd4936e657d8a0984",
+  "timestamp": {
+    "$date": "2024-04-18T12:45:24.861Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6655a09721cc8faaa3dd0000"
+  },
+  "score": 10,
+  "username": "user1",
+  "topicId": "6649305fd4936e657d8a0984",
+  "timestamp": {
+    "$date": "2024-04-21T08:35:35.172Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6aaa52e00e4cc48d712b8cae"
+  },
+  "score": 12,
+  "username": "user1",
+  "topicId": "6649305fd4936e657d8a0984",
+  "timestamp": {
+    "$date": "2024-04-30T12:10:24.861Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "664a78b754d1500a3c658ee1"
+  },
+  "timestamp": {
+    "$date": "2024-05-18T22:09:59.165Z"
+  },
+  "score": 7,
+  "username": "user1",
+  "topicId": "6647b5db009e754707162689"
+},
+{
+  "_id": {
+    "$oid": "664a79ba54d1500a3c658ee2"
+  },
+  "timestamp": {
+    "$date": "2024-05-19T22:14:18.724Z"
+  },
+  "score": 9,
+  "username": "user1",
+  "topicId": "6647b5db009e754707162689"
+},
+{
+  "_id": {
+    "$oid": "664b2d27f3b489bf05edef58"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T10:59:51.858Z"
+  },
+  "score": 20,
+  "username": "user1",
+  "topicId": "6647bdbb0ae1b6347b0dab7b"
+},
+{
+  "_id": {
+    "$oid": "664b2fcdf3b489bf05edef59"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T11:11:09.767Z"
+  },
+  "score": 18,
+  "username": "user1",
+  "topicId": "6649305fd4936e657d8a0984"
+},
+{
+  "_id": {
+    "$oid": "664b3018f3b489bf05edef5a"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T11:12:24.243Z"
+  },
+  "score": 0,
+  "username": "user1",
+  "topicId": "6649305fd4936e657d8a0984"
+},
+{
+  "_id": {
+    "$oid": "664b3b19f3b489bf05edef5b"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T11:59:21.096Z"
+  },
+  "score": 17,
+  "username": "user2",
+  "topicId": "6649305fd4936e657d8a0984"
+},
+{
+  "_id": {
+    "$oid": "664b48b8f3b489bf05edef5c"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T12:57:28.052Z"
+  },
+  "score": 9,
+  "username": "user1",
+  "topicId": "6647b5db009e754707162689"
+},
+{
+  "_id": {
+    "$oid": "664b493af3b489bf05edef5d"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T12:59:38.248Z"
+  },
+  "score": 19,
+  "username": "user1",
+  "topicId": "6647b5db009e754707162689"
+},
+{
+  "_id": {
+    "$oid": "664b53c1f3b489bf05edef5e"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T13:44:33.301Z"
+  },
+  "score": 1,
+  "username": "user1",
+  "topicId": "6647b5db009e754707162689"
+},
+{
+  "_id": {
+    "$oid": "664b5643f3b489bf05edef5f"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T13:55:15.967Z"
+  },
+  "score": 0,
+  "username": "user2",
+  "topicId": "6647bdbb0ae1b6347b0dab7b"
+},
+{
+  "_id": {
+    "$oid": "664bae693db0251a260d12c0"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T20:11:21.937Z"
+  },
+  "score": 6,
+  "username": "user2",
+  "topicId": "6647bdbb0ae1b6347b0dab7b"
+},
+{
+  "_id": {
+    "$oid": "664bd0fd11c3828ae2a1d235"
+  },
+  "timestamp": {
+    "$date": "2024-05-20T22:38:53.694Z"
+  },
+  "score": 16,
+  "username": "user1",
+  "topicId": "6647bdbb0ae1b6347b0dab7b"
+},
+{
+  "_id": {
+    "$oid": "664c89bb57469968bf1393e9"
+  },
+  "timestamp": {
+    "$date": "2024-05-21T11:47:07.484Z"
+  },
+  "score": 17,
+  "username": "user1",
+  "topicId": "6647bdbb0ae1b6347b0dab7b"
+}]
