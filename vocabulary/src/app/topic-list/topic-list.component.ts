@@ -1,12 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, TemplateRef, inject } from '@angular/core';
 import { TopicService } from '../services/topic.service';
 import { ExtendedTopicDTO, PracticeDTO, TopicDTO, formatTimestamp } from '../../../models';
 import { CommonModule } from '@angular/common';
 import { PracticeService } from '../services/practice.service';
 import { UserService } from '../services/user.service';
 import { RouterLink } from '@angular/router';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { RevisionService } from '../services/revision.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-topic-list',
@@ -17,14 +18,17 @@ import { RevisionService } from '../services/revision.service';
 })
 export class TopicListComponent implements OnInit {
 
-  username = '';
-
   private topicService = inject(TopicService);
   private practiceService = inject(PracticeService);
   private userService = inject(UserService);
+  private toastr = inject(ToastrService);
+  private modalService = inject(NgbModal);
+
   topics: ExtendedTopicDTO[] = [];
+  toBeDeleted: ExtendedTopicDTO | undefined;
   private tempTopics: ExtendedTopicDTO[] = [];
 
+  username = '';
   exerciseNumber = inject(RevisionService).getExerciceNum();
 
   ngOnInit(): void {
@@ -34,7 +38,7 @@ export class TopicListComponent implements OnInit {
         this.loadTopics();
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Failed to identify current user.', 'Cannot load');
       }
     });
   }
@@ -43,13 +47,17 @@ export class TopicListComponent implements OnInit {
     this.tempTopics = [];
     this.topicService.getAll().subscribe({
       next: (topics) => {
-        for(let topic of topics){
-          this.createExtendedTopic(topic);
+        try{
+          for(let topic of topics){
+            this.createExtendedTopic(topic);
+          }
+          this.waitForAllExtendedTopics(topics.length);
+        } catch (err) {
+          this.toastr.error('Failed to load topic details due to a server error.', 'Cannot load');
         }
-        this.waitForAllExtendedTopics(topics.length);
       },
       error: (err) => {
-        console.log(err);
+        this.toastr.error('Failed to load topic details due to a server error.', 'Cannot load');
       }
     });
   }
@@ -61,7 +69,8 @@ export class TopicListComponent implements OnInit {
         this.tempTopics.push(output);
       },
       error: (err) => {
-        console.log(err);
+        this.toastr.error('Failed to load practice details due to a server error.', 'Cannot load');
+        throw err;
       }
     });
   }
@@ -82,9 +91,9 @@ export class TopicListComponent implements OnInit {
     const mostRecentDate = dates.reduce((latest, current) => {
       return current > latest ? current : latest;
     });
-
     return mostRecentDate;
   }
+
   formatTimestamp(timestamp: string){
     if(timestamp == 'never') return timestamp;
     return formatTimestamp(timestamp);
@@ -93,14 +102,26 @@ export class TopicListComponent implements OnInit {
   deleteTopic(topic: TopicDTO){
     this.topicService.delete(topic._id.toString()).subscribe({
       next: () => {
+        this.toastr.success(`Topic "${topic.name}" (${topic.language}) successfully deleted.`, 'Topic deleted');
         this.loadTopics();
-       //TODO
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Failed to delete topic due to a server error.', 'Cannot delete');
       }
     })
   }
+
+  toggleDeleteTopicModal(topic: ExtendedTopicDTO, content: TemplateRef<any>) {
+    this.toBeDeleted = topic;
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+			(result) => {
+				this.deleteTopic(topic);
+			},
+			(reason) => {
+				this.toastr.info('The selected topic will not be deleted.', 'Operation dismissed');
+			},
+		);
+	}
 
 }
 

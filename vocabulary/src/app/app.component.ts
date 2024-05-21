@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -13,25 +14,21 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'vocabulary';
-
   authService = inject(AuthService);
-
-  //Navbar toggle bool for small screen - menu open or not
   isMenuCollapsed = true;
 
   private router = inject(Router);
+  private toastr = inject(ToastrService);
+  private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
-  //For highlighting menu item
-  activatedRoute: ActivatedRoute = inject(ActivatedRoute);
-
-  //Check if given route is active
+  //Check if given route is active for highlighting menu item
   isActiveRoute(route: string): boolean {
-    if(this.activatedRoute.snapshot.firstChild?.url.length == 0){
-      if(route == '') return true;
+    if (this.activatedRoute.snapshot.firstChild?.url.length == 0) {
+      if (route == '') return true;
       else return false;
     }
-    if(this.activatedRoute.snapshot.firstChild &&
-    this.activatedRoute.snapshot.firstChild.url[0].toString() == route) {
+    if (this.activatedRoute.snapshot.firstChild &&
+      this.activatedRoute.snapshot.firstChild.url[0].toString() == route) {
       return true;
     }
     return false;
@@ -39,8 +36,7 @@ export class AppComponent {
 
   logout() {
     this.authService.removeToken();
+    this.toastr.success('User logged out successfully.', 'Logged out');
     this.router.navigateByUrl('/login');
-    //TODO
-    //this.toastrService.success('Sikeresen kijelentkezett.', 'Kilépés');
   }
 }

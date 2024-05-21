@@ -6,6 +6,7 @@ import { TopicService } from '../services/topic.service';
 import { ObjectId } from 'mongodb';
 import { RevisionService } from '../services/revision.service';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-practice-list',
@@ -17,15 +18,15 @@ import { UserService } from '../services/user.service';
 export class PracticeListComponent implements OnInit {
   private practiceService = inject(PracticeService);
   private topicService = inject(TopicService);
-  private revisionService = inject(RevisionService);
   private userService = inject(UserService);
+  private toastr = inject(ToastrService);
   practices: ExtendedPracticeDTO[] = [];
   private tempPractices: ExtendedPracticeDTO[] = [];
   mostPractisedTopic !: TopicDTO | undefined;
   leastRecentlyPractisedTopic !: TopicDTO | undefined;
   cumulatedScore = 0;
   avgScore = 0;
-  scoreMaximum = this.revisionService.getExerciceNum();
+  scoreMaximum = inject(RevisionService).getExerciceNum();
   user!:UserDTO;
 
   ngOnInit(){
@@ -35,7 +36,7 @@ export class PracticeListComponent implements OnInit {
         this.loadPractices(user.username);
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Failed to identify current user.', 'Cannot load');
       }
     })
   }
@@ -43,13 +44,17 @@ export class PracticeListComponent implements OnInit {
   loadPractices(username: string){
     this.practiceService.getUserFiltered(username).subscribe({
       next: (practices) => {
-        practices.forEach((practice)=>this.createExtendedPractice(practice));
-        this.waitForAllExtendedPractices(practices.length);
-        this.cumulatedScore = practices.reduce((total, practice) => total + practice.score, 0);
-        this.avgScore = Math.round(this.cumulatedScore / (practices.length == 0 ? 1 : practices.length)*100)/100;
+        try {
+          practices.forEach((practice)=>this.createExtendedPractice(practice));
+          this.waitForAllExtendedPractices(practices.length);
+          this.cumulatedScore = practices.reduce((total, practice) => total + practice.score, 0);
+          this.avgScore = Math.round(this.cumulatedScore / (practices.length == 0 ? 1 : practices.length)*100)/100;
+        } catch(ex) {
+          this.toastr.error('Failed to load practices due to a server error.', 'Cannot load');
+        }
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Failed to load practices due to a server error.', 'Cannot load');
       }
     });
   }
@@ -66,7 +71,8 @@ export class PracticeListComponent implements OnInit {
         });
       },
       error: (err) => {
-        console.log(err);
+        this.toastr.error('Failed to load topic details due to a server error.', 'Cannot load');
+        throw err;
       }
     });
   }

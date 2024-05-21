@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, OnInit, inject } from '@angular/core';
-import { Colour, Languages, Level, TopicDTO } from '../../../models';
+import { Component, Input, OnChanges, inject } from '@angular/core';
+import { Colour, Level, TopicDTO } from '../../../models';
 import { TopicService } from '../services/topic.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-topic-form',
@@ -22,6 +23,7 @@ export class TopicFormComponent implements OnChanges {
   private topicService = inject(TopicService);
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
+  private toastr = inject(ToastrService);
 
   topicForm = this.formBuilder.group({
     name: this.formBuilder.control(this.topic ? this.topic.name : '', [Validators.required]),
@@ -50,8 +52,7 @@ export class TopicFormComponent implements OnChanges {
         this.createTopic(topicData);
       }
     } else {
-      //TODO
-      //this.toastr.error('Érvénytelen adatokat adott meg.', 'Sikertelen mentés', {toastClass: 'ngx-toastr toast-danger'});
+      this.toastr.error('Invalid data.', 'Cannot save');
     }
   }
 
@@ -62,11 +63,11 @@ export class TopicFormComponent implements OnChanges {
     this.topic!.level = topicData.level;
     this.topicService.update(this.topic!).subscribe({
       next: () => {
-        //TODO
+        this.toastr.success(`Topic "${topicData.name}" (${topicData.language}) successfully modified.`, 'Topic updated');
         this.router.navigateByUrl('/topics');
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Server error.', 'Cannot save');
       }
     });
   }
@@ -74,12 +75,11 @@ export class TopicFormComponent implements OnChanges {
   createTopic(topic: TopicDTO) {
     this.topicService.create(topic).subscribe({
       next: () => {
-        //TODO
-        this.topicForm.reset({ colour: Colour.Blue, level: Level.Other });
+        this.toastr.success(`Topic "${topic.name}" (${topic.language}) successfully added.`, 'Topic created');
         this.router.navigateByUrl('/topics');
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Server error.', 'Cannot save');
       }
     });
   }

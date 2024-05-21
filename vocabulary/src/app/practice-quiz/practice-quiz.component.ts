@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-practice-quiz',
@@ -24,8 +25,8 @@ export class PracticeQuizComponent {
   private userService = inject(UserService);
   private currentRoute = inject(ActivatedRoute);
   private formBuilder = inject(FormBuilder);
+  private toastr = inject(ToastrService);
 
-  //TODO
   username = '';
 
   topic !: TopicDTO;
@@ -43,7 +44,7 @@ export class PracticeQuizComponent {
         this.username = user.username;
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Failed to identify current user.', 'Cannot load');
       }
     });
     this.topicService.getOne(topicId).subscribe({
@@ -53,8 +54,7 @@ export class PracticeQuizComponent {
         this.initForm();
       },
       error: (err) => {
-        //TODO
-        console.log(err + 'hiba');
+        this.toastr.error('Failed to load topic details due to a server error.', 'Cannot load');
       }
     });
   }
@@ -102,7 +102,6 @@ export class PracticeQuizComponent {
 
 
   submitSolution() {
-    console.log(this.wordForm.value);
     // Access the array inside wordForm
     const wordsArray = this.wordFormArray.value;
 
@@ -121,11 +120,10 @@ export class PracticeQuizComponent {
   createPractice(practice: PracticeDTO){
     this.practiceService.create(practice).subscribe({
       next: () => {
-        //redirect
         this.isSolutionShown = true;
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Failed to save results due to a server error, try again.', 'Error');
       }
     });
   }

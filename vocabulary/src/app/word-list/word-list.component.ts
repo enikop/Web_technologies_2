@@ -1,10 +1,11 @@
 import { Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { PracticeDTO, TopicDTO, WordDTO } from '../../../models';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from '../services/topic.service';
 import { PracticeService } from '../services/practice.service';
 import { WordFormComponent } from '../word-form/word-form.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-word-list',
@@ -17,6 +18,8 @@ export class WordListComponent implements OnInit, OnChanges{
 
   private currentRoute = inject(ActivatedRoute);
   private topicService = inject(TopicService);
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
   words: WordDTO[] = [];
   topic!: TopicDTO;
   changeCount = 0;
@@ -37,7 +40,8 @@ export class WordListComponent implements OnInit, OnChanges{
         this.words = topic.words;
       },
       error: (err) => {
-        console.log(err + 'hiba');
+        this.toastr.error('Failed to load topic details due to a server error.', 'Cannot load');
+        this.router.navigateByUrl('/');
       }
     });
   }
@@ -51,10 +55,11 @@ export class WordListComponent implements OnInit, OnChanges{
     this.topic.words.splice(index, 1);
     this.topicService.update(this.topic).subscribe({
       next: () => {
+        this.toastr.success(`Word successfully deleted: ${word.target} - ${word.source}.`, 'Word deleted');
         this.loadTopic();
       },
       error: (err) => {
-        //TODO: message
+        this.toastr.error('Failed to delete word due to a server error.', 'Cannot delete');
       }
     })
   }

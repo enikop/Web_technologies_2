@@ -8,7 +8,7 @@
       <div class="col">
         <div class="card m-1 h-100" [ngClass]="'text-bg-' + topic.colour">
           <div class="card-header text-center d-flex justify-content-between">
-            <a class="link-opacity-75 link-opacity-25-hover link-dark" (click)="deleteTopic(topic)"><i class="fas fa-trash"></i></a>
+            <a class="link-opacity-75 link-opacity-25-hover link-dark" (click)="toggleDeleteTopicModal(topic, content)"><i class="fas fa-trash"></i></a>
             <div>{{topic.language}}</div>
             <a class="link-opacity-75 link-opacity-25-hover link-dark" href="edit-topic/{{topic._id}}"><i class="fas fa-edit"></i></a>
           </div>
@@ -35,3 +35,27 @@
       }
   </div>
 </div>
+<ng-template #content let-modal>
+	<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Topic deletion</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>
+      <strong>Are you sure you want to delete topic <span class="text-{{toBeDeleted?.colour}}">"{{toBeDeleted?.name}}" ({{toBeDeleted?.language}})</span> ?</strong>
+    </p>
+    <p>
+      All information associated to this topic, including everyone's practice history, will be permanently deleted.
+      <span class="text-danger">This operation can not be undone.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cancel')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Ok')">Delete</button>
+  </div>
+</ng-template>

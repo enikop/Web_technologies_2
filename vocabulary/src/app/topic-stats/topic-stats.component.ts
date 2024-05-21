@@ -1,7 +1,7 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { PracticeService } from '../services/practice.service';
 import { PracticeDTO, TopicDTO, convertColourToHex, formatTimestamp } from '../../../models';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from '../services/topic.service';
 import { CommonModule } from '@angular/common';
 import { RevisionService } from '../services/revision.service';
@@ -9,6 +9,7 @@ import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-topic-stats',
@@ -26,6 +27,8 @@ export class TopicStatsComponent implements OnInit {
   private practiceService = inject(PracticeService);
   private topicService = inject(TopicService);
   private userService = inject(UserService);
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
 
   topic!: TopicDTO;
   practices: PracticeDTO[] = [];
@@ -41,8 +44,8 @@ export class TopicStatsComponent implements OnInit {
         this.topic = topic;
       },
       error: (err) => {
-        //TODO
-        console.log(err + 'hiba');
+        this.toastr.error('Failed to load topic details due to a server error.', 'Cannot load');
+        this.router.navigateByUrl('/');
       }
     });
     this.userService.getAuthenticated().subscribe({
@@ -50,7 +53,8 @@ export class TopicStatsComponent implements OnInit {
         this.loadPractices(user.username);
       },
       error: (err) => {
-        //TODO
+        this.toastr.error('Failed to identify current user.', 'Cannot load');
+        this.router.navigateByUrl('/');
       }
     });
   }
@@ -63,7 +67,8 @@ export class TopicStatsComponent implements OnInit {
         this.practices = practices;
       },
       error: (err) => {
-        console.log(err + 'hiba');
+        this.toastr.error('Failed to load practice details due to a server error.', 'Cannot load');
+        this.router.navigateByUrl('/');
       }
     });
   }
@@ -121,32 +126,32 @@ export class TopicStatsComponent implements OnInit {
               color: 'white'
             },
             ticks: {
-              color: 'white' // Set x-axis text color to white
+              color: 'white'
             }
           },
           y: {
             beginAtZero: true,
-            max: 20,
+            max: this.scoreMaximum,
             title: {
               display: true,
               text: 'Score',
               color: 'white'
             },
             ticks: {
-              color: 'white' // Set y-axis text color to white
+              color: 'white'
             }
           }
         },
         plugins: {
           legend: {
             labels: {
-              color: 'white' // Set legend text color to white
+              color: 'white'
             }
           },
           tooltip: {
-            titleColor: 'white', // Set tooltip title color to white
-            bodyColor: 'white', // Set tooltip body color to white
-            footerColor: 'white' // Set tooltip footer color to white
+            titleColor: 'white',
+            bodyColor: 'white',
+            footerColor: 'white'
           },
           zoom: {
             limits: {
@@ -172,7 +177,7 @@ export class TopicStatsComponent implements OnInit {
   }
 
   createFrequencyDistribution(): number[]{
-    const scoreDistribution = new Array(21).fill(0);
+    const scoreDistribution = new Array(this.scoreMaximum+1).fill(0);
     this.practices.forEach(practice => {
       scoreDistribution[practice.score]++;
     });
@@ -182,14 +187,12 @@ export class TopicStatsComponent implements OnInit {
   drawDistributionChart() {
     const ctx = this.distChart.nativeElement.getContext('2d') as CanvasRenderingContext2D;
     const frequencyDistribution = this.createFrequencyDistribution();
-    const labels = Array.from({ length: 21 }, (_, i) => i.toString());
-    // Ensure ctx is not null
+    const labels = Array.from({ length: this.scoreMaximum+1 }, (_, i) => i.toString());
     if (!ctx) {
       throw new Error('Failed to get 2D context');
     }
-    // Number array chart data
     this.distributionChart = new Chart(ctx, {
-      type: 'bar', // Specify the type of chart you want to create
+      type: 'bar',
       data: {
         labels: labels,
         datasets: [{
@@ -213,7 +216,7 @@ export class TopicStatsComponent implements OnInit {
             position: 'bottom',
             ticks: {
               stepSize: 1,
-              color: 'white' // Set x-axis text color to white
+              color: 'white'
             }
           },
           y: {
@@ -225,20 +228,20 @@ export class TopicStatsComponent implements OnInit {
             beginAtZero: true,
             ticks: {
               stepSize: 1,
-              color: 'white' // Set y-axis text color to white
+              color: 'white'
             }
           }
         },
         plugins: {
           legend: {
             labels: {
-              color: 'white' // Set legend text color to white
+              color: 'white'
             }
           },
           tooltip: {
-            titleColor: 'white', // Set tooltip title color to white
-            bodyColor: 'white', // Set tooltip body color to white
-            footerColor: 'white' // Set tooltip footer color to white
+            titleColor: 'white',
+            bodyColor: 'white',
+            footerColor: 'white'
           }
         }
       }

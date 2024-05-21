@@ -36,7 +36,7 @@ export class LoginComponent {
       },
       error: (err) => {
         this.loginForm.reset();
-        this.toastr.error('Incorrect username or password.', "Attempt failed");
+        this.toastr.error('Incorrect username or password.', 'Attempt failed');
       }
     });
   }

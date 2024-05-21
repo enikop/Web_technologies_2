@@ -1,8 +1,19 @@
 <div class="container" *ngIf="topic">
-  <h2 class="mb-4 mt-4">
-    Quiz
-    <small class="ms-2 badge text-bg-{{topic.colour}}">{{topic.name}}</small>
-  </h2>
+  <div class="row mb-4 mt-4">
+    <div class="col-sm-6 mb-1 mt-1">
+      <h2>
+        Quiz
+        <small class="ms-2 badge text-bg-{{topic.colour}}">{{topic.name}}</small>
+      </h2>
+    </div>
+    <div class="col-sm-6 mb-1 mt-1">
+      <div class="h-100 text-end d-flex justify-content-end align-items-center" *ngIf="isSolutionShown">
+        <h4 style="margin: 0">
+          <small class="badge text-bg-{{topic.colour}}">{{calculateScore()}} <span style="font-weight: normal;">points out of {{exerciceNumber}}</span></small>
+        </h4>
+      </div>
+    </div>
+  </div>
   <div class="row mb-2">
     <div class="col-6"><b>Word</b></div>
     <div class="col-6"><b>Meaning</b></div>
@@ -22,11 +33,11 @@
         </div>
       </div>
     </div>
-    <div class="mt-3 text-center" [hidden]="isSolutionShown">
+    <div class="mt-4 text-center" [hidden]="isSolutionShown">
       <button type="submit" class="btn btn-{{topic.colour}}" (click)="submitSolution()">Submit solution</button>
     </div>
   </form>
-  <div class="mt-3 text-center" [hidden]="!isSolutionShown">
+  <div class="mt-4 text-center" [hidden]="!isSolutionShown">
     <button class="btn btn-{{topic.colour}}" (click)="navigateToStats()">Stats</button>
   </div>
 </div>

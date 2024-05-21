@@ -12,7 +12,7 @@ export function getRoutes(){
   router.get('/user/:username', checkUserIdentity, userController.getOne);
   router.post('/user', userController.create);
   router.post('/user/login', userController.login);
-  router.post('/user/authenticated', userController.getAuthenticated);
+  router.post('/user/authenticated', checkUser, userController.getAuthenticated);
 
   const topicController = new TopicController();
   router.get('/topic', checkUser, topicController.getAll);

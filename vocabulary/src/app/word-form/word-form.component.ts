@@ -3,6 +3,7 @@ import { TopicService } from '../services/topic.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TopicDTO, WordDTO } from '../../../models';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-word-form',
@@ -20,6 +21,7 @@ export class WordFormComponent {
 
   private topicService = inject(TopicService);
   private formBuilder = inject(FormBuilder);
+  private toastr = inject(ToastrService);
 
   wordForm = this.formBuilder.group({
     source: this.formBuilder.control('', [Validators.required]),
@@ -30,11 +32,10 @@ export class WordFormComponent {
 
   saveWord(){
     if (this.wordForm.valid) {
-      //Get form data
       const word = this.wordForm.value as WordDTO;
       this.addWord(word);
     } else {
-      //this.toastr.error('Érvénytelen adatokat adott meg.', 'Sikertelen mentés', {toastClass: 'ngx-toastr toast-danger'});
+      this.toastr.error('Invalid data.', 'Cannot save');
     }
   }
 
@@ -44,10 +45,10 @@ export class WordFormComponent {
       next: () => {
         this.wordChangeEvent.emit();
         this.wordForm.reset();
-        //TODO: message
+        this.toastr.success(`Word successfully added: ${word.target} - ${word.source}.`, 'Word saved');
       },
       error: (err) => {
-        //TODO: message
+        this.toastr.error('Server error.', 'Cannot save');
       }
     })
   }

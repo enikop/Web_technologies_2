@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TopicDTO } from '../../../models';
 import { TopicService } from '../services/topic.service';
 import { TopicFormComponent } from '../topic-form/topic-form.component';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-topic-edit',
@@ -16,6 +17,8 @@ export class TopicEditComponent implements OnInit {
   topic!:TopicDTO;
   private currentRoute = inject(ActivatedRoute);
   private topicService = inject(TopicService);
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
 
 
   ngOnInit(): void {
@@ -29,7 +32,8 @@ export class TopicEditComponent implements OnInit {
         this.topic = topic;
       },
       error: (err) => {
-        console.log(err + 'hiba');
+        this.toastr.error('Failed to load topic details due to a server error.', 'Cannot load');
+        this.router.navigateByUrl('/');
       }
     });
   }
