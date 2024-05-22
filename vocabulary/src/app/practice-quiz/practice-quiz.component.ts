@@ -102,6 +102,7 @@ export class PracticeQuizComponent {
 
 
   submitSolution() {
+    if(this.isSolutionShown) return;
     // Access the array inside wordForm
     const wordsArray = this.wordFormArray.value;
 

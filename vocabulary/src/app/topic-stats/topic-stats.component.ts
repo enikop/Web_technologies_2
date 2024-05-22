@@ -59,7 +59,7 @@ export class TopicStatsComponent implements OnInit {
     });
   }
 
-  loadPractices(username: string){
+  loadPractices(username: string) {
     const topicId = this.currentRoute.snapshot.params['id'];
     this.practiceService.getFiltered(username, topicId).subscribe({
       next: (practices) => {
@@ -73,11 +73,11 @@ export class TopicStatsComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(){
-    const interval = setInterval(()=>{
-      if(this.practices){
+  ngAfterViewInit() {
+    const interval = setInterval(() => {
+      if (this.practices) {
         clearInterval(interval);
-        if(this.practices.length > 0){
+        if (this.practices.length > 0) {
           this.drawTimeline();
           this.drawDistributionChart();
         }
@@ -100,7 +100,7 @@ export class TopicStatsComponent implements OnInit {
       type: 'line',
       data: {
         datasets: [{
-          label: 'Your scores out of '+this.scoreMaximum,
+          label: 'Your scores out of ' + this.scoreMaximum,
           backgroundColor: 'rgba(0, 0, 0, 0.1)',
           borderColor: convertColourToHex(this.topic.colour),
           data: data,
@@ -155,7 +155,7 @@ export class TopicStatsComponent implements OnInit {
           },
           zoom: {
             limits: {
-              x: { min: Date.parse('2024-01-01T00:00:00Z'), max: Date.parse((data[data.length-1].x.getFullYear()+1)+'-01-01T00:00:00Z') }
+              x: { min: Date.parse('2024-01-01T00:00:00Z'), max: Date.parse((data[data.length - 1].x.getFullYear() + 1) + '-01-01T00:00:00Z') }
             },
             pan: {
               enabled: true,
@@ -176,8 +176,8 @@ export class TopicStatsComponent implements OnInit {
     });
   }
 
-  createFrequencyDistribution(): number[]{
-    const scoreDistribution = new Array(this.scoreMaximum+1).fill(0);
+  createFrequencyDistribution(): number[] {
+    const scoreDistribution = new Array(this.scoreMaximum + 1).fill(0);
     this.practices.forEach(practice => {
       scoreDistribution[practice.score]++;
     });
@@ -187,7 +187,7 @@ export class TopicStatsComponent implements OnInit {
   drawDistributionChart() {
     const ctx = this.distChart.nativeElement.getContext('2d') as CanvasRenderingContext2D;
     const frequencyDistribution = this.createFrequencyDistribution();
-    const labels = Array.from({ length: this.scoreMaximum+1 }, (_, i) => i.toString());
+    const labels = Array.from({ length: this.scoreMaximum + 1 }, (_, i) => i.toString());
     if (!ctx) {
       throw new Error('Failed to get 2D context');
     }

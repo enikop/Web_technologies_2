@@ -9,7 +9,8 @@
     <div class="col-sm-6 mb-1 mt-1">
       <div class="h-100 text-end d-flex justify-content-end align-items-center" *ngIf="isSolutionShown">
         <h4 style="margin: 0">
-          <small class="badge text-bg-{{topic.colour}}">{{calculateScore()}} <span style="font-weight: normal;">points out of {{exerciceNumber}}</span></small>
+          <small class="badge text-bg-{{topic.colour}}">{{calculateScore()}} <span style="font-weight: normal;">points
+              out of {{exerciceNumber}}</span></small>
         </h4>
       </div>
     </div>
@@ -23,12 +24,22 @@
       <div *ngFor="let wordControl of wordFormArray.controls; let i = index" [formGroupName]="i" class="row mb-1">
         <div class="col-6">
           <div class="form-group">
-            <input type="text" autocomplete="off" class="form-control input-sm" formControlName="target" [id]="'target-' + i" [ngClass]="{ 'crossed-out is-invalid': isSolutionShown && words[i].targetBlank && !words[i].correct, 'is-valid': isSolutionShown && words[i].targetBlank && words[i].correct }" placement="top" [ngbTooltip]="words[i].targetBlank && !words[i].correct ? 'Solution: '+words[i].target : null" tooltipClass="my-custom-class">
+            <input type="text" [readOnly]="isSolutionShown" autocomplete="off" class="form-control input-sm"
+              formControlName="target" [id]="'target-' + i"
+              [ngClass]="{ 'crossed-out is-invalid': isSolutionShown && words[i].targetBlank && !words[i].correct, 'is-valid': isSolutionShown && words[i].targetBlank && words[i].correct }"
+              placement="top"
+              [ngbTooltip]="words[i].targetBlank && !words[i].correct ? 'Solution: '+words[i].target : null"
+              tooltipClass="my-custom-class">
           </div>
         </div>
         <div class="col-6">
           <div class="form-group">
-            <input type="text" autocomplete="off" class="form-control input-sm" formControlName="source" [id]="'source-' + i" [ngClass]="{ 'crossed-out is-invalid': isSolutionShown && !words[i].targetBlank && !words[i].correct, 'is-valid': isSolutionShown && !words[i].targetBlank && words[i].correct }" placement="top" [ngbTooltip]="!words[i].targetBlank && !words[i].correct ? 'Solution: '+words[i].source : null" tooltipClass="my-custom-class">
+            <input type="text" [readOnly]="isSolutionShown" autocomplete="off" class="form-control input-sm"
+              formControlName="source" [id]="'source-' + i"
+              [ngClass]="{ 'crossed-out is-invalid': isSolutionShown && !words[i].targetBlank && !words[i].correct, 'is-valid': isSolutionShown && !words[i].targetBlank && words[i].correct }"
+              placement="top"
+              [ngbTooltip]="!words[i].targetBlank && !words[i].correct ? 'Solution: '+words[i].source : null"
+              tooltipClass="my-custom-class">
           </div>
         </div>
       </div>

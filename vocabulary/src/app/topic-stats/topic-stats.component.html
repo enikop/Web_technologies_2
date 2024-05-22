@@ -25,12 +25,12 @@
               <div class="col-sm-8"><b>Date and time</b></div>
               <div class="col-sm-4 text-end"><b>Score</b></div>
             </div>
-          @for(practice of practices; track $index){
+            @for(practice of practices; track $index){
             <div class="row pt-1">
               <div class="col-sm-8">{{formatTimestamp(practice.timestamp)}}</div>
               <div class="col-sm-4 text-end">{{practice.score}}/{{scoreMaximum}}</div>
             </div>
-          }
+            }
           </div>
         </div>
       </div>

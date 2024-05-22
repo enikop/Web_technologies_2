@@ -1,7 +1,5 @@
 import { ObjectId } from "typeorm"
 
-export var Languages = ["English", "Dutch", "French", "German", "Hungarian"];
-
 export enum Level {
   A1 = 'A1',
   A2 = 'A2',

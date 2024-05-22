@@ -8,8 +8,8 @@ export function getRoutes(){
   const router = express.Router();
   const userController = new UserController();
 
-  router.get('/user', checkUser, userController.getAll);
-  router.get('/user/:username', checkUserIdentity, userController.getOne);
+  //router.get('/user', checkUser, userController.getAll);
+  //router.get('/user/:username', checkUserIdentity, userController.getOne);
   router.post('/user', userController.create);
   router.post('/user/login', userController.login);
   router.post('/user/authenticated', checkUser, userController.getAuthenticated);
@@ -23,9 +23,9 @@ export function getRoutes(){
 
   const practiceController = new PracticeController();
   router.get('/practice', checkUser, practiceController.getAll);
-  router.get('/practice/:id', checkUser, practiceController.getOne);
-  router.get('/practice/byuserandtopic/:username/:topicId', checkUserIdentity, practiceController.getFiltered)
-  router.get('/practice/byuser/:username', checkUserIdentity, practiceController.getUserFiltered)
+  //router.get('/practice/:id', checkUser, practiceController.getOne);
+  router.get('/practice/byuserandtopic/:username/:topicId', checkUserIdentity, practiceController.getFiltered);
+  router.get('/practice/byuser/:username', checkUserIdentity, practiceController.getUserFiltered);
   router.post('/practice', checkUser, practiceController.create);
 
   return router;

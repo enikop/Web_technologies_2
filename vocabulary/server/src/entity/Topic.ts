@@ -1,5 +1,5 @@
 import { Entity, ObjectIdColumn, ObjectId, Column, CreateDateColumn, PrimaryColumn} from "typeorm"
-import { Colour, Languages, Level } from "../../../models"
+import { Colour, Level } from "../../../models"
 import { Word } from "./Word"
 
 @Entity()
@@ -12,7 +12,7 @@ export class Topic {
     name: string
 
     @Column()
-    language: string = Languages[0]
+    language: string
 
     @Column({
       type: 'enum',
