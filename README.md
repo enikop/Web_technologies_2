@@ -7,7 +7,7 @@
 Szótárfüzet alkalmazás. \
 **Technológia:** Angular, Bootstrap, Node.js, Express, TypeORM, Chart.js, JWT \
 **Adatbázis:** MongoDB \
-**Dokumentáció:** [vocabulary.pdf](vocabulary.pdf) 
+**Dokumentáció:** [vocabulary_docs.pdf](vocabulary_docs.pdf) 
 ### Konfiguráció
 #### Adatbázis
 **Host és port:** localhost:27017 \
